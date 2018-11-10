@@ -1,0 +1,40 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">Workshops</div>
+  <a class="btn btn-primary" [routerLink]="['/workshop-add']">
+    Add a workshop
+  </a>
+
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table" *ngIf="workshops && workshops.length">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Is Free</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let workshop of workshops">
+            <td>
+              <a [routerLink]="['/workshop-detail', workshop.id]">
+                {{ workshop.description }}
+              </a>
+            </td>
+            <td>{{ workshop.isFree }}</td>
+            <td>
+              <button
+                *ngIf="!workshop.isUserSubscribed"
+                class="btn btn-primary"
+                (click)="subscribeToWorkShop(workshop.id)"
+              >
+                Subscribe
+              </button>
+              <span *ngIf="workshop.isUserSubscribed"> Subscribed </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<h3>Add WorkShop</h3>
+<hr />
+<form
+  [formGroup]="workShopForm"
+  (ngSubmit)="addWorkShop()"
+  #formDir="ngForm"
+  novalidate
+>
+  <div class="form-group row">
+    <label class=" control-label col-md-12" for="Name">Description:</label>
+    <div class="col-md-4">
+      <input
+        class="form-control"
+        maxlength="200"
+        type="text"
+        formControlName="description"
+      />
+    </div>
+    <span
+      class="text-danger"
+      *ngIf="
+        workShopForm.hasError('required', 'description') && formDir.submitted
+      "
+    >
+      Description is required.
+    </span>
+  </div>
+  <div class="form-group row">
+    <label class=" control-label col-md-12" for="Address">Is Free?</label>
+    <div class="col-md-4">
+      <input type="radio" value="true" formControlName="isFree" /> True
+      <input type="radio" value="false" formControlName="isFree" /> False
+    </div>
+    <span
+      class="text-danger"
+      *ngIf="workShopForm.hasError('required', 'isFree') && formDir.submitted"
+    >
+      Is Free value is required.
+    </span>
+  </div>
+  <div class="form-group">
+    <div class="col-md-4 col-md-offset-2">
+      <span>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!workShopForm.valid"
+        >
+          Save
+        </button>
+      </span>
+      <span>
+        <a class="btn btn-default" [routerLink]="['/workshop']"> Back </a>
+      </span>
+    </div>
+  </div>
+</form>
